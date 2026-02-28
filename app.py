@@ -21,7 +21,7 @@ app = Flask(__name__)
 conn = psycopg2.connect(
     dbname="voltgrid_system",
     user="postgres",
-    password="mokshagna0987",
+   password=os.getenv("PASSWORD"),
     host="localhost",
     port="5432"
 )
@@ -210,4 +210,5 @@ def generate_bill(session_id):
 # ---------------- RUN ----------------
 
 if __name__ == "__main__":
+
     app.run(debug=True)

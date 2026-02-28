@@ -7,7 +7,8 @@
 ##  Team
 
  **Mokshagna Ratakonda**
- ** and Kundan Ratakonda**
+ ** and **
+ ** Kundan Ratakonda**
 
 ---
 

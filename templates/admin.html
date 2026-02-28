@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>VoltGrid Admin Control</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="header">
+        ⚡ VoltGrid Infrastructure Control Center
+    </div>
+
+    <div class="main-container">
+
+        <!-- LEFT 70% DASHBOARD -->
+        <div class="glass dashboard">
+
+            <div class="section-title">
+                Active Charging Sessions
+            </div>
+
+            <div class="revenue-box">
+                Total Revenue: ₹ {{ revenue }} INR
+            </div>
+
+            <table>
+                <tr>
+                    <th>Session</th>
+                    <th>Vehicle</th>
+                    <th>City</th>
+                    <th>Start Time</th>
+                    <th>Point</th>
+                    <th>Action</th>
+                </tr>
+
+                {% for s in sessions %}
+                <tr>
+                    <td>{{ s[0] }}</td>
+                    <td>{{ s[1] }}</td>
+                    <td>{{ s[2] }}</td>
+                    <td>{{ s[3] }}</td>
+                    <td>{{ s[4] }}</td>
+                    <td>
+                        <a href="/stop/{{ s[0] }}">
+                            <button>Stop & Generate Bill</button>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+
+        </div>
+
+        <!-- RIGHT 30% START SESSION -->
+        <div class="glass start-panel">
+
+            <div class="section-title">
+                Start New Charging Session
+            </div>
+
+            <form action="/start" method="post">
+
+                <label>City</label>
+                <select name="city_id">
+                    {% for city in cities %}
+                    <option value="{{ city[0] }}">{{ city[1] }}</option>
+                    {% endfor %}
+                </select>
+
+                <label>Car Model</label>
+                <select name="model_id">
+                    {% for model in models %}
+                    <option value="{{ model[0] }}">{{ model[1] }}</option>
+                    {% endfor %}
+                </select>
+
+                <label>Vehicle Registration</label>
+                <input type="text" name="car_name" required>
+
+                <button type="submit">Start Charging</button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
